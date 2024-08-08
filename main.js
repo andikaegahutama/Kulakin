@@ -17,10 +17,10 @@ async function execute() {
     // await doLogin();
     // await doRegist();
     // await doCreateCustomer();
-    await doEditCustomer();
+    // await doEditCustomer();
     // await doDeleteCustomer();
     // await doAddCart();
-    // await doAddOneEDX();
+    await doAddOneEDX();
     // await doAddMuchEDX();
     // await doAddOneEDM();
     // await doAddMuchEDM();
