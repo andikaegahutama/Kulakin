@@ -67,12 +67,11 @@ addCart = async () => {
     await minus.click();
     await console.log("Berhasil mengurangi barang");
 
-    // const trash = await page.waitForSelector(
-    //   "xpath//html/body/div/div[2]/div[1]/div[2]/label/div[2]/button"
-    // );
-    // await trash.click();
-    // // await trash.click();
-    // console.log("Berhasil menghapus barang");
+    const trash = await page.waitForSelector(
+      "xpath//html/body/div/div[2]/div[1]/div[2]/label/div[2]/button"
+    );
+    await trash.click();
+    console.log("Berhasil menghapus barang");
   } catch {}
 };
 module.exports = addCart;

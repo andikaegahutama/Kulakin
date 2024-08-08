@@ -16,9 +16,9 @@ let randomNumber = Math.floor(Math.random * number.length) + 1;
 
 editCustomer = async () => {
   const browser = await puppeteer.launch({
-    // headless: false,
+    headless: false,
     args: [`--window-size=1920,1080`],
-    // devtools: true,
+    devtools: true,
   });
   const page = await browser.newPage();
 
@@ -34,27 +34,39 @@ editCustomer = async () => {
   await pin.type(dataPin());
 
   await page.click("xpath//html/body/div/div[2]/div[2]/button");
-  await console.log("Berhasil login createCustomer");
+  await console.log("Berhasil login editCustomer");
 
-  const menuCustomer = await page.waitForSelector(
-    "xpath//html/body/div/div[4]/a[4]/div"
-  );
-  await menuCustomer.click();
-
-  const detailKontak = await page.waitForSelector(
-    "xpath//html/body/div/div[2]/div[1]/div[2]/div/div[1]/div/div[1]"
-  );
-  await detailKontak.click(
-    "xpath//html/body/div/div[2]/div[1]/div[2]/div/div[1]/div/div[1]"
-  );
-
-  // const editKontak = await page.waitForSelector(
-  //   "xpath//html/body/div/div[2]/div[2]/div[1]/div[1]/div/div"
-  // );
-  // await editKontak.click(
-  //   "xpath//html/body/div/div[2]/div[2]/div[1]/div[1]/div/div"
-  // );
-
+  try {
+    const menuCustomer = await page.waitForSelector(
+      "xpath//html/body/div/div[4]/a[4]/div"
+    );
+    await menuCustomer.click();
+    await page.waitForNavigation({ waitUntil: "networkidle0" });
+    let detailKontak;
+    for (let i = 0; i < 1; i++) {
+      // Coba hingga 5 kali
+      try {
+        detailKontak = await page.waitForXPath(
+          "//html/body/div/div[2]/div[1]/div[2]/div/div[1]/div",
+          { timeout: 2000 }
+        );
+        await detailKontak.click();
+        console.log("Clicked on detail kontak");
+        break; // Keluar dari loop jika berhasil
+      } catch (e) {
+        console.log("Detail kontak not found, retrying...");
+      }
+    }
+    // const editKontak = await page.waitForSelector(
+    //   "xpath//html/body/div/div[2]/div[2]/div[1]/div[1]/div/div"
+    // );
+    // await editKontak.click(
+    //   "xpath//html/body/div/div[2]/div[2]/div[1]/div[1]/div/div"
+    // );
+    // console.log("Bisa gak??");
+  } catch (error) {
+    console.error("Console", error);
+  }
   // const nameCS = await page.waitForSelector("#name");
   // await nameCS.click(nameCS);
   // await nameCS.click({ clickCount: 3 });
