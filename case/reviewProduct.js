@@ -1,67 +1,62 @@
 const puppeteer = require("puppeteer");
+const path = require("path");
+const { dataWhatsapp, dataPin } = require("../case/data/data");
 
-review = async () => {
-  try {
-    const browser = await puppeteer.launch({
-      headless: false,
-      args: [`--window-size=1920,1080`],
-    });
-    const page = await browser.newPage();
-    await page.setViewport({ width: 1475, height: 825 });
-    await page.goto("https://dev.kulakin.id");
-    console.log("Berhasil mengakses kulakin");
+const imagePath = path.resolve(__dirname, "../image/img.png");
 
-    await page.click("xpath//html/body/div/div[2]/div[1]/div[1]/a/div");
+const review = async () => {
+  const browser = await puppeteer.launch({
+    headless: false,
+    args: [`--window-size=1920,1080`],
+    devtools: true,
+  });
+  const page = await browser.newPage();
 
-    const whatsappfield = await page.waitForSelector("#whatsapp");
-    await page.click("#whatsapp");
-    await whatsappfield.type("6285179512101");
-    console.log(whatsappfield);
-    const pin = await page.waitForSelector("#pin");
-    await page.click("#pin");
-    await pin.type("888888");
+  await page.setViewport({ width: 1000, height: 700 });
+  await page.goto("https://dev.kulakin.id/auth/login");
 
-    await page.click("xpath//html/body/div/div[2]/div[2]/button");
-    await page.evaluate(() => {
-      window.scrollTo(0, document.body.scrollHeight), 2000;
-    });
-    const cartEDX = await page.waitForSelector(
-      "xpath//html/body/div/div[2]/div[3]/div[2]/div/div[2]/div/div[1]/div/div[2]/button[1]"
-    );
-    await cartEDX.click();
+  const whatsappfield = await page.waitForSelector("#whatsapp");
+  await whatsappfield.type(dataWhatsapp());
 
-    const cartEDM = await page.waitForSelector(
-      "xpath//html/body/div/div[2]/div[3]/div[2]/div/div[2]/div/div[4]/div/div[2]/button[1]"
-    );
-    await cartEDM.click();
+  const pin = await page.waitForSelector("#pin");
+  await pin.type(dataPin());
 
-    const cartFastEDX = await page.waitForSelector(
-      "xpath//html/body/div/div[2]/div[3]/div[2]/div/div[2]/div/div[2]/div/div[2]/button[2]"
-    );
-    await cartFastEDX.click();
+  await page.click("xpath//html/body/div/div[2]/div[2]/button");
+  console.log("Berhasil login reviewProduct");
 
-    setTimeout(async () => {
-      const plus = await page.waitForSelector(
-        "xpath//html/body/div/div[2]/div[1]/div[3]/label/div[2]/div/button[2]"
-      );
-      await plus.click();
-      await plus.click();
-    }, 7000);
+  const pesanan = await page.waitForSelector(
+    "xpath//html/body/div/div[4]/a[3]"
+  );
+  await pesanan.click();
 
-    setTimeout(async () => {
-      const minus = await page.waitForSelector(
-        "xpath//html/body/div/div[2]/div[1]/div[3]/label/div[2]/div/button[1]"
-      );
-      await minus.click();
-    }, 8000);
+  const doneStatus = await page.waitForSelector(
+    "xpath//html/body/div/div[2]/div[1]/div[3]/div/a[5]"
+  );
+  await doneStatus.click();
 
-    setTimeout(async () => {
-      const trash = await page.waitForSelector(
-        "xpath//html/body/div/div[2]/div[1]/div[2]/label/div[2]/button"
-      );
-      await trash.click();
-      await trash.click();
-    }, 9000);
-  } catch {}
+  const reviewButton = await page.waitForSelector(
+    "xpath//html/body/div/div[2]/div[2]/div[1]/div[2]/div[2]/div/div[2]/button"
+  );
+  await reviewButton.click();
+
+  const textArea = await page.waitForSelector(
+    "xpath//html/body/div[1]/div[8]/div/div/div/div[2]/div[1]/div[4]/textarea"
+  );
+  await textArea.type("Sangat bagus aku suka sekali produknya");
+
+  const uploadImage = await page.waitForSelector('input[type="file"]');
+  await uploadImage.uploadFile(imagePath);
+
+  const uploadSuccess = await page.evaluate(() => {
+    const inputElement = document.querySelector('input[type="file"]');
+    return inputElement.files.length > 0;
+  });
+  console.log("Upload successful:", uploadSuccess);
+
+  const reviewNow = await page.waitForSelector(
+    "xpath//html/body/div[1]/div[8]/div/div/div/div[2]/div[2]/div/div/button/div"
+  );
+  await reviewNow.click();
 };
+
 module.exports = review;
