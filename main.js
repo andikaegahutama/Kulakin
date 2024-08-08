@@ -18,7 +18,7 @@ async function execute() {
     // await doLogin();
     // await doRegist();
     // await doCreateCustomer();
-    // await doEditCustomer();
+    await doEditCustomer();
     // await doDeleteCustomer();
     // await doAddCart();
     // await doAddOneEDX();
@@ -27,7 +27,7 @@ async function execute() {
     // await doAddMuchEDM();
     // await doAddDifferentEDM();
     // await doAddDifferentEDX();
-    await doLogout();
+    // await doLogout();
   } catch (error) {
     await console.log(error);
   } finally {
