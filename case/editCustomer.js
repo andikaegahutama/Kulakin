@@ -62,16 +62,17 @@ editCustomer = async () => {
   await nameCS.type(chance.name());
 
   const birthdayInput = await page.waitForSelector("#birthdate");
+  const shiftTab = async () => {
+    await page.keyboard.down("ShiftLeft");
+    await page.keyboard.press("Tab");
+  };
   await birthdayInput.click();
   await birthdayInput.type(`201902020`);
   await birthdayInput.click();
-  await page.keyboard.down("ShiftLeft");
-  await page.keyboard.press("Tab");
+  await shiftTab();
   await birthdayInput.type(`02`);
-  await page.keyboard.down("ShiftLeft");
-  await page.keyboard.press("Tab");
-  await page.keyboard.down("ShiftLeft");
-  await page.keyboard.press("Tab");
+  await shiftTab();
+  await shiftTab();
   await birthdayInput.type(`02`);
 
   const genderlist = await page.waitForSelector("#react-select-2-input");
