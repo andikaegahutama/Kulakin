@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
 const { dataWhatsapp, dataPin } = require("../case/data/data");
-addTransactionMuchEDX = async () => {
+addTransactionMuchEDM = async () => {
   try {
     const browser = await puppeteer.launch({
       headless: false,
@@ -85,4 +85,4 @@ addTransactionMuchEDX = async () => {
     await console.log("Berhasil membuat transaksi addOneEDM");
   } catch {}
 };
-module.exports = addTransactionMuchEDX;
+module.exports = addTransactionMuchEDM;
