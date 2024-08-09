@@ -1,20 +1,12 @@
 const puppeteer = require("puppeteer");
-const {
-  dataNama,
-  dataWhatsapp,
-  dataPin,
-  dataKelurahan,
-  datart,
-  datarw,
-  datafullAddress,
-} = require("../case/data/data");
+const { dataWhatsapp, dataPin } = require("../case/data/data");
 
 addTransactionOneEDM = async () => {
   try {
     const browser = await puppeteer.launch({
-      // headless: false,
+      headless: false,
       args: [`--window-size=1920,1080`],
-      // devtools: true,
+      devtools: true,
     });
     const page = await browser.newPage();
 

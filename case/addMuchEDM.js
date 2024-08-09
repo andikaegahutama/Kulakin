@@ -1,26 +1,28 @@
 const puppeteer = require("puppeteer");
+const { dataWhatsapp, dataPin } = require("../case/data/data");
 addTransactionMuchEDX = async () => {
   try {
     const browser = await puppeteer.launch({
       headless: false,
       args: [`--window-size=1920,1080`],
+      devtools: true,
     });
     const page = await browser.newPage();
-    await page.setViewport({ width: 1475, height: 825 });
-    await page.goto("https://dev.kulakin.id");
-    console.log("Berhasil mengakses kulakin");
 
-    await page.click("xpath//html/body/div/div[2]/div[1]/div[1]/a/div");
+    await page.setViewport({ width: 1000, height: 700 });
+    await page.goto("https://dev.kulakin.id/auth/login");
 
     const whatsappfield = await page.waitForSelector("#whatsapp");
     await page.click("#whatsapp");
-    await whatsappfield.type("6285179512101");
-    console.log(whatsappfield);
+    await whatsappfield.type(dataWhatsapp());
+
     const pin = await page.waitForSelector("#pin");
     await page.click("#pin");
-    await pin.type("888888");
+    await pin.type(dataPin());
 
     await page.click("xpath//html/body/div/div[2]/div[2]/button");
+
+    await console.log("Berhasil login addOneEDM");
 
     await page.evaluate(() => {
       window.scrollTo(0, document.body.scrollHeight), 2000;
@@ -36,6 +38,8 @@ addTransactionMuchEDX = async () => {
     );
     await plus.click();
     await plus.click();
+    await plus.click();
+    await plus.click();
 
     const buyButton = await page.waitForSelector(
       "xpath//html/body/div/div[2]/div[2]/div[2]/button[1]"
@@ -48,14 +52,15 @@ addTransactionMuchEDX = async () => {
     await addressButton.click();
 
     const addressName = await page.waitForSelector(
-      "xpath//html/body/div/div[5]/div[2]/div[2]/div[1]/div[3]/div/div[1]/div"
+      "xpath//html/body/div/div[7]/div/div/div/div[2]/div[1]/div[2]/div/div/div[1]/div"
     );
     await addressName.click();
 
     const addAddress = await page.waitForSelector(
-      "xpath//html/body/div/div[5]/div[2]/div[2]/div[2]/button"
+      "xpath//html/body/div/div[7]/div/div/div/div[2]/div[2]/div/div/button/div"
     );
     await addAddress.click();
+
     setTimeout(async () => {
       const paymentButton = await page.waitForSelector(
         "xpath//html/body/div/div[2]/div[1]/div[4]/div"
@@ -63,24 +68,21 @@ addTransactionMuchEDX = async () => {
       await paymentButton.click();
     }, 1000);
 
-    // const codPayment = await page.waitForSelector(
-    //   "xpath//html/body/div/div[5]/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div"
-    // );
-    // await codPayment.click();
-
-    const vaPayment = await page.waitForSelector(
-      "xpath//html/body/div/div[5]/div[2]/div[2]/div/div[2]/div/div[2]/div[2]/div"
+    const codPayment = await page.waitForSelector(
+      "xpath//html/body/div/div[7]/div/div/div/div[2]/div[1]/div[1]/div/div[2]/div/div"
     );
-    await vaPayment.click();
+    await codPayment.click();
+
+    //   // const vaPayment = await page.waitForSelector(
+    //   //   "xpath//html/body/div/div[5]/div[2]/div[2]/div/div[2]/div/div[2]/div[2]/div"
+    //   // );
+    //   // await vaPayment.click();
 
     const payButton = await page.waitForSelector(
-      "xpath//html/body/div/div[5]/div[2]/div[2]/div/div[3]/div[2]/button"
+      "xpath//html/body/div/div[7]/div/div/div/div[2]/div[1]/div[2]/div[2]/button"
     );
     await payButton.click();
-    setTimeout(async () => {
-      await page.close();
-      await page.close();
-    }, 3000);
+    await console.log("Berhasil membuat transaksi addOneEDM");
   } catch {}
 };
 module.exports = addTransactionMuchEDX;
