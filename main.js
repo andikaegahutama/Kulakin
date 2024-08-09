@@ -25,9 +25,9 @@ async function execute() {
     // await doAddOneEDX();
     // await doAddMuchEDX();
     // await doAddOneEDM();
-    await doAddMuchEDM();
+    // await doAddMuchEDM();
     // await doAddDifferentEDM();
-    // await doAddDifferentEDX();
+    await doAddDifferentEDX();
     // await doAddReviewProduct();
     // await doLogout();
   } catch (error) {
