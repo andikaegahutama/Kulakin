@@ -1,16 +1,5 @@
 const puppeteer = require("puppeteer");
-const {
-  dataNama,
-  dataWhatsapp,
-  dataPin,
-  dataKelurahan,
-  datart,
-  datarw,
-  datafullAddress,
-  dataKodeUnik,
-  dataCOD,
-  dataVA,
-} = require("../case/data/data");
+const { dataWhatsapp, dataPin } = require("../cases/data/data");
 
 addCart = async () => {
   try {

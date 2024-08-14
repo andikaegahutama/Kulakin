@@ -1,15 +1,7 @@
 const puppeteer = require("puppeteer");
 const Chance = require("chance");
 const chance = new Chance();
-const {
-  dataNama,
-  dataWhatsapp,
-  dataPin,
-  dataKelurahan,
-  datart,
-  datarw,
-  datafullAddress,
-} = require("../case/data/data");
+const { datafullAddress } = require("../cases/data/data");
 let number = [0, 1, 2, 3];
 let randomNumber = Math.floor(Math.random * number.length) + 1;
 

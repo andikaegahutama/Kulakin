@@ -1,7 +1,6 @@
 const puppeteer = require("puppeteer");
-const { dataWhatsapp, dataPin } = require("../case/data/data");
-
-addTransactionOneEDM = async () => {
+const { dataWhatsapp, dataPin } = require("../cases/data/data");
+addTransactionMuchEDX = async () => {
   try {
     const browser = await puppeteer.launch({
       headless: false,
@@ -23,20 +22,23 @@ addTransactionOneEDM = async () => {
 
     await page.click("xpath//html/body/div/div[2]/div[2]/button");
 
-    await console.log("Berhasil login addOneEDM");
+    await console.log("Berhasil login addOneEDX");
 
     await page.evaluate(() => {
       window.scrollTo(0, document.body.scrollHeight), 2000;
     });
 
-    const cartFastEDM = await page.waitForSelector(
+    const cartFastEDX = await page.waitForSelector(
       "xpath//html/body/div/div[2]/div[3]/div[2]/div/div[2]/div/div[4]/div/div[2]/button[2]"
     );
-    await cartFastEDM.click();
+    await cartFastEDX.click();
 
     const plus = await page.waitForSelector(
       "xpath//html/body/div/div[2]/div[1]/div[2]/label/div[2]/div/button[2]"
     );
+    await plus.click();
+    await plus.click();
+    await plus.click();
     await plus.click();
 
     const buyButton = await page.waitForSelector(
@@ -80,7 +82,7 @@ addTransactionOneEDM = async () => {
       "xpath//html/body/div/div[7]/div/div/div/div[2]/div[1]/div[2]/div[2]/button"
     );
     await payButton.click();
-    await console.log("Berhasil membuat transaksi addOneEDM");
+    await console.log("Berhasil membuat transaksi addOneEDX");
   } catch {}
 };
-module.exports = addTransactionOneEDM;
+module.exports = addTransactionMuchEDX;

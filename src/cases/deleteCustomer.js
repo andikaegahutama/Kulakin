@@ -1,15 +1,7 @@
 const puppeteer = require("puppeteer");
 const Chance = require("chance");
 const chance = new Chance();
-const {
-  dataNama,
-  dataWhatsapp,
-  dataPin,
-  dataKelurahan,
-  datart,
-  datarw,
-  datafullAddress,
-} = require("../case/data/data");
+const { dataWhatsapp, dataPin } = require("../cases/data/data");
 
 deleteCustomer = async () => {
   const browser = await puppeteer.launch({

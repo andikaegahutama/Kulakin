@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
 const path = require("path");
-const { dataWhatsapp, dataPin } = require("../case/data/data");
+const { dataWhatsapp, dataPin } = require("../cases/data/data");
 const imagePath = path.resolve(__dirname, "../image/img.png");
 
 const review = async () => {
