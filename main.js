@@ -8,8 +8,6 @@ const doAddOneEDX = require("../Kulakin/case/addOneEDX");
 const doAddMuchEDX = require("../Kulakin/case/addMuchEDX");
 const doAddOneEDM = require("../Kulakin/case/addOneEDM");
 const doAddMuchEDM = require("../Kulakin/case/addMuchEDM");
-const doAddDifferentEDM = require("../Kulakin/case/addDifferentEDM");
-const doAddDifferentEDX = require("../Kulakin/case/addDifferentEDX");
 const doAddReviewProduct = require("../Kulakin/case/reviewProduct");
 const doLogout = require("../Kulakin/case/logout");
 
@@ -18,16 +16,14 @@ async function execute() {
   try {
     // await doLogin();
     // await doRegist();
-    // await doCreateCustomer();
+    await doCreateCustomer();
     // await doEditCustomer();
     // await doDeleteCustomer();
     // await doAddCart();
-    // await doAddOneEDX();
+    await doAddOneEDX();
     // await doAddMuchEDX();
     // await doAddOneEDM();
     // await doAddMuchEDM();
-    // await doAddDifferentEDM();
-    await doAddDifferentEDX();
     // await doAddReviewProduct();
     // await doLogout();
   } catch (error) {

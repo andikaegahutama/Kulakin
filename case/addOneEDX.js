@@ -1,24 +1,13 @@
 const puppeteer = require("puppeteer");
-const {
-  dataNama,
-  dataWhatsapp,
-  dataPin,
-  dataKelurahan,
-  datart,
-  datarw,
-  datafullAddress,
-  dataKodeUnik,
-  dataCOD,
-  dataVA,
-} = require("../case/data/data");
+const { dataWhatsapp, dataPin, dataCOD } = require("../case/data/data");
 
 // EDX Dipslipy 1
 addTransactionOne = async () => {
   try {
     const browser = await puppeteer.launch({
-      headless: false,
+      // headless: false,
       args: [`--window-size=1920,1080`],
-      devtools: true,
+      // devtools: true,
     });
     const page = await browser.newPage();
 
@@ -73,8 +62,8 @@ addTransactionOne = async () => {
       await paymentButton.click();
     }, 1000);
 
-    const Payment = await page.waitForSelector(dataCOD());
-    await Payment.click();
+    // const Payment = await page.waitForSelector(dataCOD());
+    // await Payment.click();
 
     const payButton = await page.waitForSelector(
       "xpath//html/body/div/div[7]/div/div/div/div[2]/div[1]/div[2]/div[2]/button"
